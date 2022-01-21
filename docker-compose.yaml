@@ -43,8 +43,8 @@ services:
     - GRAYLOG_HTTP_EXTERNAL_URI=http://10.19.236.77:9000/
     - GRAYLOG_SERVER_JAVA_OPTS=-Dlog4j2.formatMsgNoLookups=true
     links:
-      - mongodb:mongo
-      - elasticsearch
+      - gr_mongodb:mongo
+      - gr_elasticsearch
     depends_on:
       - gr_mongodb
       - gr_elasticsearch

@@ -1,16 +1,14 @@
 version: '2.1'
 services:
-  mongodb:
+  gr_mongodb:
     image: mongo:4.1
-    container_name: mongodb
     mem_limit: 2048m
     restart: always
     volumes:
       - ./mongodata:/data/db:rw
 
-  elasticsearch:
+  gr_elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:7.16.1
-    container_name: elasticsearch
     restart: always
     mem_limit: 4096m
     environment:
@@ -26,12 +24,11 @@ services:
     volumes:
       - ./esdata1/data:/usr/share/elasticsearch/data:rw
 
-  graylog:
+  gr_graylog:
     image: graylog/graylog:4.2.4
     volumes:
       - ./graylog/:/usr/share/graylog/
       - "/etc/localtime:/etc/localtime:ro"
-    container_name: graylog
     restart: always
     environment:
     - TZ=Europe/Moscow
@@ -49,8 +46,8 @@ services:
       - mongodb:mongo
       - elasticsearch
     depends_on:
-      - mongodb
-      - elasticsearch
+      - gr_mongodb
+      - gr_elasticsearch
     ports:
       # HTTP
       - 9090:9000
